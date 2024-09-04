@@ -1,8 +1,10 @@
 package info.preva1l.fadfc.config;
 
-import de.exlll.configlib.*;
+import de.exlll.configlib.Configuration;
+import de.exlll.configlib.NameFormatters;
+import de.exlll.configlib.YamlConfigurationProperties;
+import de.exlll.configlib.YamlConfigurations;
 import info.preva1l.fadfc.Fadfc;
-import info.preva1l.fadfc.persistence.DatabaseType;
 import info.preva1l.fadfc.utils.Logger;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -31,32 +33,26 @@ public class Lang {
             .header(CONFIG_HEADER).build();
 
 
-    private Commands commands = new Commands();
+    private String prefix = "&#9555ff&lFACTIONS &8&l»&r";
+
+    private Command command = new Command();
 
     @Getter
     @Configuration
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class Commands {
-        private boolean main = true;
-        private boolean home = true;
-        private boolean reset = true;
+    public static class Command {
+        private String noPermission = "&c&l(!)&r &fInsufficient permission";
+        private String unknownArgs = "&c&l(!)&r &fUnknown arguments.";
+        private String mustBePlayer = "&c&l(!)&r &fYou must be a player to run this command.";
     }
 
-    private Storage storage = new Storage();
+    private Errors errors = new Errors();
 
     @Getter
     @Configuration
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class Storage {
-        @Comment("Allowed: SQLITE, MYSQL, MARIADB, MONGO")
-        private DatabaseType type = DatabaseType.SQLITE;
+    public static class Errors {
 
-        private String host = "localhost";
-        private int port = 3306;
-        private String database = "Fadfc";
-        private String username = "root";
-        private String password = "myFancyPassword";
-        private boolean useSsl = false;
     }
 
     public static void reload() {

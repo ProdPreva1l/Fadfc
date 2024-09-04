@@ -30,18 +30,6 @@ public class Config {
             .setNameFormatter(NameFormatters.LOWER_KEBAB_CASE)
             .header(CONFIG_HEADER).build();
 
-
-    private Commands commands = new Commands();
-
-    @Getter
-    @Configuration
-    @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class Commands {
-        private boolean main = true;
-        private boolean home = true;
-        private boolean reset = true;
-    }
-
     private Storage storage = new Storage();
 
     @Getter

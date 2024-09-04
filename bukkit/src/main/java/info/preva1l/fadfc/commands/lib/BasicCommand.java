@@ -1,15 +1,16 @@
 package info.preva1l.fadfc.commands.lib;
 
 import info.preva1l.fadfc.Fadfc;
+import info.preva1l.fadfc.config.Lang;
 import info.preva1l.fadfc.models.user.CommandUser;
 import info.preva1l.fadfc.models.user.ConsoleUser;
+import info.preva1l.fadfc.utils.Text;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class BasicCommand {
     private final Command info;
@@ -40,15 +41,15 @@ public abstract class BasicCommand {
     public boolean subCommandExecutor(CommandUser sender, String[] args) {
         for (BasicSubCommand subCommand : getSubCommands()) {
             if (args[0].equalsIgnoreCase(subCommand.getName())
-                    || Arrays.stream(subCommand.getAliases()).collect(Collectors.toList()).contains(args[0])) {
+                    || Arrays.stream(subCommand.getAliases()).toList().contains(args[0])) {
 
                 if (subCommand.isInGameOnly() && sender instanceof ConsoleUser) {
-                    sender.sendMessage("MUST BE PLAYER LOCALE");
+                    sender.sendMessage(Text.modernMessage(Lang.getInstance().getCommand().getMustBePlayer()));
                     return false;
                 }
 
                 if (!subCommand.getPermission().isEmpty() && !sender.hasPermission(subCommand.getPermission())) {
-                    sender.sendMessage("NO PERMISSION LOCALE");
+                    sender.sendMessage(Text.modernMessage(Lang.getInstance().getCommand().getNoPermission()));
                     return false;
                 }
 

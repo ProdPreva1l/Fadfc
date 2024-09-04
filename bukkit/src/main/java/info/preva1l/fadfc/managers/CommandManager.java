@@ -3,6 +3,7 @@ package info.preva1l.fadfc.managers;
 import info.preva1l.fadfc.Fadfc;
 import info.preva1l.fadfc.commands.lib.BasicCommand;
 import info.preva1l.fadfc.commands.lib.BasicSubCommand;
+import info.preva1l.fadfc.config.Lang;
 import info.preva1l.fadfc.models.user.CommandUser;
 import info.preva1l.fadfc.models.user.ConsoleUser;
 import info.preva1l.fadfc.models.user.OnlineUser;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 public class CommandManager {
@@ -78,11 +78,11 @@ public class CommandManager {
 
         public boolean execute(@NotNull CommandSender sender, @NotNull String label, @NotNull String[] args) {
             if (this.basicCommand.isInGameOnly() && sender instanceof ConsoleCommandSender) {
-                sender.sendMessage(Text.legacyMessage("&cYou must run this command as a player!"));
+                sender.sendMessage(Text.legacyMessage(Lang.getInstance().getCommand().getNoPermission()));
                 return false;
             }
             if (this.getPermission() != null && !sender.hasPermission(this.getPermission())) {
-                sender.sendMessage(Text.legacyMessage("&cNo Permission!"));
+                sender.sendMessage(Text.legacyMessage(Lang.getInstance().getCommand().getNoPermission()));
                 return false;
             }
 
@@ -129,7 +129,7 @@ public class CommandManager {
 
             List<String> ret = new ArrayList<>();
             for (BasicSubCommand subCommand : basicCommand.getSubCommands()) {
-                if (!subCommand.getName().equals(args[0]) && !Arrays.stream(subCommand.getAliases()).collect(Collectors.toList()).contains(args[0])) {
+                if (!subCommand.getName().equals(args[0]) && !Arrays.stream(subCommand.getAliases()).toList().contains(args[0])) {
                     continue;
                 }
                 if (!subCommand.getPermission().isEmpty() && !commandUser.hasPermission(subCommand.getPermission())) {
