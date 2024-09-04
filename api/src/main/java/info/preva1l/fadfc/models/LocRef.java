@@ -1,4 +1,4 @@
-package info.preva1l.fadfc.models.claim;
+package info.preva1l.fadfc.models;
 
 import lombok.Getter;
 

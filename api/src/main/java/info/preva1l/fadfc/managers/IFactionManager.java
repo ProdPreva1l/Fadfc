@@ -2,7 +2,7 @@ package info.preva1l.fadfc.managers;
 
 import info.preva1l.fadfc.models.IFaction;
 import info.preva1l.fadfc.models.claim.ClaimChunk;
-import info.preva1l.fadfc.models.claim.Loc;
+import info.preva1l.fadfc.models.Loc;
 
 import java.util.List;
 import java.util.Optional;

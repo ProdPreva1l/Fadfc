@@ -1,11 +1,13 @@
 package info.preva1l.fadfc.models.user;
 
 import info.preva1l.fadfc.Fadfc;
+import info.preva1l.fadfc.models.IFaction;
 import lombok.Getter;
 import net.kyori.adventure.audience.Audience;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Getter
@@ -28,5 +30,10 @@ public class OnlineUser implements User, CommandUser {
     @Override
     public boolean hasPermission(@NotNull String permission) {
         return player.hasPermission(permission);
+    }
+
+    @Override
+    public Optional<IFaction> getFaction() {
+        return Optional.empty();
     }
 }

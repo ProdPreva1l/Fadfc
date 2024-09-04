@@ -2,11 +2,12 @@ package info.preva1l.fadfc.models;
 
 import info.preva1l.fadfc.models.claim.ClaimChunk;
 import info.preva1l.fadfc.models.user.User;
+import info.preva1l.fadfc.persistence.DatabaseObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public interface IFaction {
+public interface IFaction extends DatabaseObject {
     @NotNull String getTag();
     void setTag(@NotNull String tag);
 
