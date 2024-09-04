@@ -1,0 +1,11 @@
+name: Fadfc
+description: Finally a Decent Factions Core
+author: Preva1l
+version: '${version}'
+main: info.preva1l.fadfc.Fadfc
+
+permissions:
+  fadfc.use:
+    default: true
+  fadfc.info:
+    default: true
