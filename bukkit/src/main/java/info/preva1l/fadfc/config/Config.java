@@ -36,6 +36,9 @@ public class Config {
     @Configuration
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Jobs {
+        @Comment("How big the thread pool is for jobs. Increase if jobs are taking a long time to complete.")
+        private int poolSize = 3;
+
         @Comment("How often factions data should save, in minutes.")
         private int factionsSaveInterval = 30;
 

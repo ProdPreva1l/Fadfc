@@ -1,5 +1,6 @@
 package info.preva1l.fadfc.jobs;
 
+import info.preva1l.fadfc.config.Config;
 import info.preva1l.fadfc.utils.Logger;
 import lombok.AllArgsConstructor;
 
@@ -16,7 +17,8 @@ import java.util.concurrent.TimeUnit;
 public abstract class Job {
     private final String name;
     private final Duration interval;
-    private final ScheduledExecutorService scheduler = new ScheduledThreadPoolExecutor(1);
+    private static final ScheduledExecutorService scheduler =
+            new ScheduledThreadPoolExecutor(Config.getInstance().getJobs().getPoolSize());
 
     public final void start() {
         scheduler.scheduleAtFixedRate(this::run, 0L,
