@@ -30,6 +30,19 @@ public class Config {
             .setNameFormatter(NameFormatters.LOWER_KEBAB_CASE)
             .header(CONFIG_HEADER).build();
 
+    private Jobs jobs = new Jobs();
+
+    @Getter
+    @Configuration
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    public static class Jobs {
+        @Comment("How often factions data should save, in minutes.")
+        private int factionsSaveInterval = 30;
+
+        @Comment("How often user data should save, in minutes.")
+        private int usersSaveInterval = 10;
+    }
+
     private Storage storage = new Storage();
 
     @Getter

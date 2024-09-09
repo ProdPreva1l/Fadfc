@@ -4,10 +4,7 @@ import info.preva1l.fadfc.models.user.OnlineUser;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserManager {
@@ -34,6 +31,10 @@ public class UserManager {
 
     public void invalidate(String username) {
         usersCacheName.remove(username);
+    }
+
+    public List<OnlineUser> getAllUsers() {
+        return new ArrayList<>(usersCacheName.values());
     }
 
     public Optional<OnlineUser> getUser(String name) {

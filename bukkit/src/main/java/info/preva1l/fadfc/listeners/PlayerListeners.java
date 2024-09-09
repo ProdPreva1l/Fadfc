@@ -12,13 +12,11 @@ public class PlayerListeners implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         PersistenceManager.getInstance().get(User.class, e.getPlayer().getUniqueId()).thenAccept(user -> {
-            OnlineUser newUser;
-            if (user.isEmpty()) {
+            OnlineUser newUser = user.map(value -> OnlineUser.fromDb(value, e.getPlayer())).orElse(null);
+            if (newUser == null) {
                 newUser = new OnlineUser(e.getPlayer().getName(), e.getPlayer().getUniqueId(), e.getPlayer(), null);
-                PersistenceManager.getInstance().save(User.class, newUser);
-                return;
             }
-            UserManager.getInstance().cacheUser(OnlineUser.fromDb(user.get(), e.getPlayer()));
+            UserManager.getInstance().cacheUser(newUser);
         });
     }
 
