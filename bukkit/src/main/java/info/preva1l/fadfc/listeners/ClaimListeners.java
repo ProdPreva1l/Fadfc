@@ -1,6 +1,7 @@
 package info.preva1l.fadfc.listeners;
 
 import info.preva1l.fadfc.managers.FactionManager;
+import info.preva1l.fadfc.managers.UserManager;
 import info.preva1l.fadfc.models.IFaction;
 import info.preva1l.fadfc.models.Loc;
 import info.preva1l.fadfc.models.user.OnlineUser;
@@ -41,7 +42,11 @@ public class ClaimListeners implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        if (!isActionAllowed(new OnlineUser(event.getPlayer()), Loc.fromBukkit(event.getBlock().getLocation()))) {
+        Optional<OnlineUser> user = UserManager.getInstance().getUser(event.getPlayer().getUniqueId());
+        if (user.isEmpty()) {
+            throw new RuntimeException("User never connected?");
+        }
+        if (!isActionAllowed(user.get(), Loc.fromBukkit(event.getBlock().getLocation()))) {
             return;
         }
         event.setCancelled(true);
@@ -50,7 +55,11 @@ public class ClaimListeners implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        if (!isActionAllowed(new OnlineUser(event.getPlayer()), Loc.fromBukkit(event.getBlock().getLocation()))) {
+        Optional<OnlineUser> user = UserManager.getInstance().getUser(event.getPlayer().getUniqueId());
+        if (user.isEmpty()) {
+            throw new RuntimeException("User never connected?");
+        }
+        if (!isActionAllowed(user.get(), Loc.fromBukkit(event.getBlock().getLocation()))) {
             return;
         }
         event.setCancelled(true);

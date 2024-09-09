@@ -1,8 +1,8 @@
 package info.preva1l.fadfc.managers;
 
 import info.preva1l.fadfc.models.IFaction;
-import info.preva1l.fadfc.models.claim.ClaimChunk;
 import info.preva1l.fadfc.models.Loc;
+import info.preva1l.fadfc.models.claim.ClaimChunk;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +37,7 @@ public class FactionManager implements IFactionManager {
 
     @Override
     public Optional<IFaction> getFactionByTag(String tag) {
+        if (tag == null) return Optional.empty();
         return Optional.ofNullable(factionsCache.get(tag));
     }
 

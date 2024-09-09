@@ -26,4 +26,9 @@ public class Faction implements IFaction {
     public void claimChunk(@NotNull ClaimChunk claimChunk) {
         claims.add(claimChunk);
     }
+
+    @Override
+    public Loc getSpawn() {
+        return null;
+    }
 }

@@ -6,7 +6,6 @@ import info.preva1l.fadfc.commands.lib.BasicSubCommand;
 import info.preva1l.fadfc.config.Lang;
 import info.preva1l.fadfc.models.user.CommandUser;
 import info.preva1l.fadfc.models.user.ConsoleUser;
-import info.preva1l.fadfc.models.user.OnlineUser;
 import info.preva1l.fadfc.utils.CommandMapUtil;
 import info.preva1l.fadfc.utils.Logger;
 import info.preva1l.fadfc.utils.TaskManager;
@@ -86,7 +85,8 @@ public class CommandManager {
                 return false;
             }
 
-            CommandUser commandUser = sender instanceof Player ? new OnlineUser((Player) sender) : new ConsoleUser(Fadfc.i().getAudiences().console());
+
+            CommandUser commandUser = sender instanceof Player ? UserManager.getInstance().getUser(sender.getName()).get() : new ConsoleUser(Fadfc.i().getAudiences().console());
 
             if (this.basicCommand.isAsync()) {
                 TaskManager.runAsync(Fadfc.i(), () -> basicCommand.execute(commandUser, args));
@@ -98,7 +98,7 @@ public class CommandManager {
 
         @NotNull
         public List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
-            CommandUser commandUser = sender instanceof Player ? new OnlineUser((Player) sender) : new ConsoleUser(Fadfc.i().getAudiences().console());
+            CommandUser commandUser = sender instanceof Player ? UserManager.getInstance().getUser(sender.getName()).get() : new ConsoleUser(Fadfc.i().getAudiences().console());
 
             // Primary argument
             if (args.length <= 1) {

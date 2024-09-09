@@ -19,4 +19,6 @@ public interface IFaction extends DatabaseObject {
 
     List<ClaimChunk> getClaims();
     void claimChunk(@NotNull ClaimChunk claimChunk);
+
+    Loc getSpawn();
 }
