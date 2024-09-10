@@ -3,6 +3,7 @@ description: Finally a Decent Factions Core
 author: Preva1l
 version: '${version}'
 main: info.preva1l.fadfc.Fadfc
+api-version: 1.16
 
 permissions:
   fadfc.use:

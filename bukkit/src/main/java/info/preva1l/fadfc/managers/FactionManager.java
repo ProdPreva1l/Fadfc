@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class FactionManager implements IFactionManager {
+public final class FactionManager implements IFactionManager {
     private static FactionManager instance;
     private final Map<String, IFaction> factionsCache = new ConcurrentHashMap<>();
 

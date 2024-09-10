@@ -24,7 +24,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Getter
-public class CommandManager {
+public final class CommandManager {
     private static CommandManager instance;
     private final List<BasicCommand> loadedCommands = new ArrayList<>();
 
